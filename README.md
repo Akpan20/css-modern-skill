@@ -1,9 +1,13 @@
 # 🛠️ CSS Modern Reference & Layout Architect (2026)
 
-A production-grade Claude skill & prompt library aligned with W3C CSS3/4/5 specs, MDN Web Docs, and modern frontend architecture patterns. Built on Eric Meyer's *CSS Pocket Reference* (5th Ed., O'Reilly 2018) and upgraded to 2026 standards.
+A production-grade Claude skill & prompt library aligned with W3C CSS3/4/5 specs, MDN Web Docs,
+and modern frontend architecture patterns. Built on Eric Meyer's *CSS Pocket Reference*
+(5th Ed., O'Reilly 2018) and upgraded to 2026 standards.
 
 ## 📚 Foundation
+
 This skill is grounded in the authoritative *CSS Pocket Reference* by Eric A. Meyer, providing:
+
 - ✅ Complete selector reference (universal, attribute, pseudo-classes, pseudo-elements)
 - ✅ Full property catalog with `Inh.`/`Anim.` flags and formal value syntax
 - ✅ Cascade, specificity, and inheritance mechanics explained
@@ -11,7 +15,9 @@ This skill is grounded in the authoritative *CSS Pocket Reference* by Eric A. Me
 - ✅ Value types: colors, lengths, angles, times, URIs, calc(), variables
 
 ## 🔄 2026 Modern Upgrades
+
 Beyond the 2018 baseline, this skill adds:
+
 | Feature | Spec Status | Use Case |
 |---------|-------------|----------|
 | `@layer` cascade control | 🟢 Stable | Architecture precedence management |
@@ -25,12 +31,14 @@ Beyond the 2018 baseline, this skill adds:
 | CSS Nesting (`&`) | 🟢 Stable | Cleaner selector authoring |
 
 ## 📦 Quick Start
+
 1. **Clone**: `git clone https://github.com/<your-org>/css-modern-skill.git`
 2. **Activate**: Paste `.claude-instructions.md` into Claude's **Custom Instructions** or **Project Settings**
 3. **Prompt**: Use `prompts/` templates for rapid debugging & architecture
 4. **Context**: Run `@workspace` or `@file styles.css` in Claude Chat for context-aware outputs
 
 ## 🧠 Skill Features
+
 - ✅ **Cascade 2.0**: `@layer` → `@scope` → specificity → order resolution
 - ✅ **Layout Systems**: Flexbox (`gap`), Grid (`subgrid`), Container Queries, Flow
 - ✅ **Modern Selectors**: `:has()`, `:is()`, `:where()`, native nesting (`&`)
@@ -39,10 +47,11 @@ Beyond the 2018 baseline, this skill adds:
 - ✅ **Progressive Enhancement**: `@supports` fallbacks, browser support tags (🟢/🔵/🟡)
 
 ## 📐 Response Framework
+
 Every output follows this spec-compliant structure:
 
-
 ## 🚀 Usage
+
 | Intent | Prompt File | Example Query |
 |--------|-------------|---------------|
 | Debug cascade conflict | `prompts/cascade-debug.md` | "Why does `.btn:hover` override `@layer components { .btn { ... } }`?" |
@@ -54,38 +63,18 @@ Every output follows this spec-compliant structure:
 
 ## 🗂️ Repository Structure
 
+```text
 css-modern-skill/
-├── .claude-instructions.md # Core system prompt (drop into Claude)
-├── README.md # This file
+├── .claude-instructions.md    # Core system prompt (drop into Claude)
+├── README.md                  # This file
 ├── prompts/
-│ ├── cascade-debug.md # Specificity & @layer conflict resolver
-│ ├── container-query.md # @container component patterns
-│ ├── modern-color.md # oklch()/color-mix()/light-dark() theming
-│ ├── layout-architecture.md # Grid/Flex/Subgrid patterns
-│ └── has-selector.md # :has() parent-state architecture
+│   ├── cascade-debug.md       # Specificity & @layer conflict resolver
+│   ├── container-query.md     # @container component patterns
+│   ├── modern-color.md        # oklch()/color-mix()/light-dark() theming
+│   ├── layout-architecture.md # Grid/Flex/Subgrid patterns
+│   └── has-selector.md        # :has() parent-state architecture
 ├── examples/
-│ └── skill-output-format.css # Reference implementation of output standards
-├── LICENSE # MIT
-├── CONTRIBUTING.md # Extension guidelines
+│   └── skill-output-format.css # Reference implementation of output standards
+├── LICENSE                    # MIT
+├── CONTRIBUTING.md            # Extension guidelines
 └── .gitignore
-
-
-## 🤝 Contributing
-See `CONTRIBUTING.md`. We welcome:
-- New prompt templates for emerging CSS features
-- Spec updates aligned with W3C Candidate Recommendations
-- Architecture patterns for design systems, frameworks, or platforms
-- Browser support data refinements (caniuse/MDN cross-references)
-
-### Prompt Guidelines
-- Keep prompts under 150 words for clarity
-- Always request: cascade impact, fallback strategy, support tags
-- Use `${1:placeholder}` syntax for VS Code snippet compatibility
-- Test outputs against the Response Framework before submitting
-
-## 📜 License
-MIT © Skyconet
-
----
-
-> 💡 **Pro Tip**: Store `.claude-instructions.md` in your monorepo's `.claude/` folder for auto-detection by AI extensions like Roo Code, Cline, or Continue.dev.

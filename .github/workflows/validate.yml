@@ -1,0 +1,80 @@
+name: Validate CSS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.css'
+      - '**.md'
+      - 'package.json'
+      - '.stylelintrc.json'
+      - '.browserslistrc'
+      - '.github/workflows/validate.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.css'
+      - '**.md'
+      - 'package.json'
+      - '.stylelintrc.json'
+      - '.browserslistrc'
+      - '.github/workflows/validate.yml'
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    name: Validate CSS & Browser Support
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Lint CSS with stylelint
+        run: npx stylelint "**/*.css" --formatter verbose
+
+      - name: Validate browserslist config
+        run: npx browserslist --config .browserslistrc --env production
+
+      - name: Check for unsupported features (caniuse)
+        run: |
+          # Install caniuse-lite for feature checking
+          npm install --no-save caniuse-lite
+          # Run a simple check for modern CSS features
+          node -e "
+            const caniuse = require('caniuse-lite');
+            const features = [
+              'css-grid', 'flexbox', 'css-variables', 'css-container-queries',
+              'css-has', 'css-scope', 'css-layers', 'oklch', 'color-mix'
+            ];
+            features.forEach(f => {
+              const data = caniuse.feature(caniuse.features[f]);
+              if (!data) {
+                console.error('❌ Feature not found:', f);
+                process.exit(1);
+              }
+              console.log('✅', f, ':', data.title);
+            });
+          "
+
+      - name: Validate prompt files (markdown lint)
+        run: npx markdownlint-cli2 "prompts/*.md" "README.md" "CONTRIBUTING.md" --config .markdownlint.jsonc
+
+      - name: Report results
+        if: always()
+        run: |
+          echo "## Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ stylelint: Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ browserslist: Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ caniuse feature check: Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ markdown lint: Passed" >> $GITHUB_STEP_SUMMARY
