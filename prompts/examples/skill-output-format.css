@@ -1,0 +1,163 @@
+/* ==========================================================================
+   skill-output-format.css
+   Modern CSS Reference Implementation (W3C 2026 Baseline)
+   Demonstrates the Claude CSS Skill's production-ready output standards.
+   ========================================================================== */
+
+/* 🔹 CASCADE ARCHITECTURE
+   @layer ordering enforces predictable specificity & prevents override conflicts.
+   Order: reset → base → tokens → components → utilities → overrides
+   ========================================================================== */
+@layer reset, base, tokens, components, utilities, overrides;
+
+/* 📝 MODERN TOKENS & @property REGISTRATION
+   Typed custom properties enable smooth animation & design system consistency.
+   Uses perceptually uniform oklch() + light-dark() for auto theme switching.
+   ========================================================================== */
+@layer tokens {
+  @property --hue-primary {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 220;
+  }
+
+  @property --radius {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0.75rem;
+  }
+
+  :root {
+    /* 🌐 Support: 🟢 Stable (Chromium/Safari/Firefox 2023+) */
+    --color-primary: oklch(65% 0.22 var(--hue-primary));
+    --color-primary-hover: color-mix(in oklch, var(--color-primary), black 15%);
+    --color-surface: light-dark(
+      oklch(98% 0.01 var(--hue-primary)),
+      oklch(15% 0.03 var(--hue-primary))
+    );
+    --color-text: light-dark(
+      oklch(20% 0.02 var(--hue-primary)),
+      oklch(95% 0.01 var(--hue-primary))
+    );
+
+    --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+    --space-md: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+    --space-xl: clamp(2rem, 1.8rem + 1vw, 3rem);
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 200ms;
+  }
+}
+
+/* 🛠️ RESET & BASE
+   Modern baseline: border-box, smooth scroll, dvh, system font stack.
+   No vendor prefixes unless critical for interop.
+   ========================================================================== */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    min-height: 100dvh;
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--color-surface);
+    color: var(--color-text);
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+  }
+  img, picture, video, canvas, svg { display: block; max-width: 100%; }
+  input, button, textarea, select { font: inherit; }
+}
+
+/* 📐 COMPONENT: Modern Card w/ Container Queries & :has()
+   🔢 Specificity: 0,0,1,0 (class-based, no ID/!important)
+   💡 Architecture: Container-driven layout > viewport media queries
+   ========================================================================== */
+@layer components {
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-md);
+    padding: var(--space-xl);
+  }
+
+  .card {
+    container-type: inline-size;
+    container-name: card;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: oklch(from var(--color-surface) l c h / 0.8);
+    border: 1px solid oklch(from var(--color-text) l c h / 0.15);
+    border-radius: var(--radius);
+    backdrop-filter: blur(8px);
+    transition: 
+      transform var(--duration-fast) var(--ease-out-expo),
+      box-shadow var(--duration-fast) var(--ease-out-expo);
+  }
+
+  /* 🔹 Parent-state styling (replaces JS class toggling)
+     🌐 Support: 🟢 Stable (Chromium 105+, Safari 15.4+, FF 121+)
+  */
+  .card:has(.card__badge--new) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary), transparent 70%);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px oklch(0% 0 0 / 0.15);
+  }
+
+  .card__title {
+    font-size: clamp(1.25rem, 1rem + 0.5cqi, 1.5rem);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* 📐 Container Query Enhancement
+     ⚙️ Layout Impact: Switches to horizontal row when container ≥ 24rem
+  */
+  @container card (min-width: 24rem) {
+    .card {
+      flex-direction: row;
+      align-items: center;
+    }
+    .card__media { width: 12rem; flex-shrink: 0; }
+  }
+}
+
+/* 🌐 PROGRESSIVE ENHANCEMENT & FEATURE QUERIES
+   Base styles work everywhere. Modern enhancements isolated in @supports.
+   ✅ Performance: Only parses scroll-driven animation when supported.
+   ========================================================================== */
+@layer utilities {
+  .progressive-enhancement {
+    padding: 1rem;
+    background: #f0f0f0;
+  }
+
+  /* 🟡 Experimental/Interop (2024–2026) */
+  @supports (animation-timeline: scroll()) {
+    .progressive-enhancement {
+      animation: fade-in linear;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; translate: 0 2rem; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+  }
+}
+
+/* 🔢 CASCADE OVERRIDE EXAMPLE
+   Demonstrates how @layer overrides win without !important or specificity wars.
+   ========================================================================== */
+@layer overrides {
+  .card--featured {
+    background: oklch(20% 0.15 45);
+    color: oklch(95% 0.02 45);
+  }
+}
