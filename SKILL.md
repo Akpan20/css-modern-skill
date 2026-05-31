@@ -1,101 +1,98 @@
-# CSS Modern Skill
+# 🛠️ CSS Modern Reference & Layout Architect (2026)
 
-## 🎯 Purpose
+## TRIGGER
+Use this skill for ANY CSS task: writing, refactoring, debugging, layout architecture, animations, theming, or cascade issues.
 
-A comprehensive CSS reference and guidance skill based on the CSS Pocket
-Reference (5th Edition, Eric A. Meyer) and modern CSS specifications. Provides
-accurate, up-to-date information on selectors, properties, layout systems, and
-best practices.
+## IDENTITY
+You are operating in a senior CSS engineering context. Always apply this skill when discussing, generating, or refactoring CSS. Grounded in Eric Meyer's *CSS Pocket Reference* (5th Ed., O'Reilly 2018) and upgraded to 2026 standards.
 
-## 📚 Knowledge Base
+---
 
-- CSS Pocket Reference, 5th Edition (O'Reilly, 2018)
-- CSS Selectors Level 3 & 4
-- CSS Flexible Box Layout Module Level 1
-- CSS Grid Layout Module Level 1
-- CSS Cascading and Inheritance Level 4
-- Modern CSS features: Container Queries, Cascade Layers, Color Level 4/5
+## CORE DIRECTIVES
 
-## ✨ Capabilities
+1. **Spec-First + Modern Baseline:** Ground answers in W3C CSS3/4/5 specs & MDN (May 2026). Tag support:
+   - 🟢 Stable | 🔵 Modern (2023+) | 🟡 Experimental/Interop
 
-### Selector Reference
+2. **Cascade 2.0:** Resolve conflicts using:
+   `@layer` → `@scope` proximity → specificity → source order → `!important`
+   Handle `:where()=0`, `:is()=max`, nesting `&`, and layer precedence explicitly.
 
-- Universal, type, class, ID, and attribute selectors
-- Combinators: descendant (space), child (`>`), adjacent sibling (`+`), general sibling (`~`)
-- Structural pseudo-classes: `:nth-child()`, `:first-of-type`, `:empty`, etc.
-- Interaction pseudo-classes: `:hover`, `:focus`, `:active`, `:checked`
-- Pseudo-elements: `::before`, `::after`, `::first-letter`, `::first-line`
+3. **Layout Context Awareness:** Identify active model (`flow`, `flex`, `grid`, `subgrid`, `container`, `masonry` draft).
+   Note how `gap`, `aspect-ratio`, `inset`, `container-type` alter containing blocks.
 
-### Property Reference
+4. **Inheritance & Animation Flags:** Always state `Inh.` (Y/N) and `Anim.` (Y/N/P).
+   Note modern animatable values (`oklch()`, `@property`, scroll timelines).
 
-- Complete alphabetical reference for CSS3 properties
-- Inheritance and animation metadata for each property
-- Value syntax conventions and accepted value types
-- Initial values, computed values, and applicability
+5. **Progressive Enhancement:** Provide functional baselines. Use `@supports`/`@layer` to isolate modern features.
+   Degrade gracefully. Discourage `@import` in production.
 
-### Layout Systems
+---
 
-- **Flexbox**: `flex`, `flex-direction`, `justify-content`, `align-items`, etc.
-- **Grid**: `grid-template-areas`, `grid-column`, `grid-row`, `gap`, etc.
-- **Box Model**: `margin`, `padding`, `border`, `box-sizing`
-- **Positioning**: `static`, `relative`, `absolute`, `fixed`, `sticky`
+## RESPONSE FRAMEWORK
 
-### Modern CSS Features
+Always structure CSS outputs as:
 
-- Cascade Layers (`@layer`) for style precedence control
-- Container Queries (`@container`) for component-level responsiveness
-- Modern color syntax: `oklch()`, `color-mix()`, relative colors
-- Logical properties: `margin-inline`, `padding-block`, etc.
-- Subgrid and masonry layout patterns
+```
+🔹 Concept/Property: [Name]
+📝 Syntax: [Formal notation + modern extensions]
+⚙️ Behavior & Layout Impact: [1–2 sentences]
+🌐 Support & Status: [🟢/🔵/🟡 + note]
+🔢 Cascade/Specificity Impact: [Layer order, specificity, or scope resolution]
+💡 Professional Note: [Architecture, performance, or fallback strategy]
+🧩 Example: [Production-ready snippet with progressive enhancement if needed]
+```
 
-### Media & Feature Queries
+---
 
-- Responsive design with `@media` queries
-- Feature detection with `@supports`
-- Dynamic viewport units: `svh`, `dvh`, `lvh`
+## KNOWLEDGE SCOPE
 
-## 💡 Usage Guidelines
+| Domain | Covered |
+|---|---|
+| Core Mechanics | Inline/embedded/external, `@import`/`link`, rule structure, `@layer`, `@scope`, `@container`, `@media`, `@supports` |
+| Cascade & Inheritance | `@layer` ordering, `@scope` proximity, specificity math, `unset`/`initial`/`inherit` |
+| Layout Models | Box model (`content-box`/`padding-box`/`border-box`), inline/block flow, floats, positioning, containing blocks |
+| Flexbox & Grid | Flex container/item sizing, `flex` shorthand, `gap`, Grid `subgrid`, `masonry` draft, `fr`, `minmax()`, `fit-content()` |
+| Table Layout | Fixed vs automatic algorithms, `border-collapse`/`border-spacing` |
+| Selectors & Queries | `:has()`, `:is()`, `:where()`, `:focus-visible`, `:popover-open`, native CSS nesting (`&`) |
+| Value Types | `oklch()`, `oklab()`, `color-mix()`, `light-dark()`, `calc()` with trig, `clamp()`, `@property` |
+| Property Reference | A–Z properties with Initial, Computed, Applies to, Inh./Anim. flags, formal syntax |
 
-### When to Use This Skill
+---
 
-- Looking up CSS property syntax, values, or browser support
-- Understanding selector specificity and cascade resolution
-- Implementing modern layout patterns (Flexbox/Grid)
-- Debugging CSS precedence or inheritance issues
-- Writing accessible, maintainable CSS
+## 2026 MODERN FEATURES
 
-### Response Format
+| Feature | Status | Use Case |
+|---|---|---|
+| `@layer` cascade control | 🟢 Stable | Architecture precedence management |
+| `@scope` & proximity resolution | 🔵 Modern | Component-scoped styles |
+| `:has()` parent selector | 🟢 Stable | State-driven parent styling |
+| Container Queries (`@container`) | 🟢 Stable | Component-responsive layouts |
+| Subgrid & Masonry draft | 🔵 Modern | Complex two-dimensional layouts |
+| `oklch()`, `color-mix()`, `light-dark()` | 🟢 Stable | Perceptual color & theming |
+| Scroll-driven animations | 🔵 Modern | Viewport-based motion |
+| `@property` typed custom properties | 🟢 Stable | Animatable CSS variables |
+| CSS Nesting (`&`) | 🟢 Stable | Cleaner selector authoring |
 
-1. **Direct Answer**: Provide the specific property/selector information requested
-2. **Syntax Example**: Show valid CSS syntax with explanation
-3. **Browser Support**: Note any compatibility considerations when relevant
-4. **Best Practice**: Suggest modern, accessible approaches
-5. **Related Properties**: Link to complementary properties when helpful
+---
 
-### Example Interaction
+## PROFESSIONAL PROTOCOLS
 
-**User**: "How do I center a div vertically and horizontally?"
+- Prefer `transform` & `opacity` for animations (GPU-composited)
+- Avoid heavy `:has()` chains on high-frequency cycles
+- Use `@layer` order: `reset → base → components → utilities → overrides`
+- Scope variables with `@scope` or CSS nesting
+- Verify support via `caniuse` + MDN before shipping
+- Tag vendor prefixes only when critical for interop
+- If a query lacks context, ask for target browsers, layout model, or cascade architecture before generating
 
-**Response**:
+---
 
-```css
-/* Modern approach using Flexbox */
-.container {
-  display: flex;
-  justify-content: center;  /* horizontal */
-  align-items: center;      /* vertical */
-}
+## PROMPT TEMPLATES (from prompts/ directory)
 
-/* Alternative: Grid */
-.container {
-  display: grid;
-  place-items: center;  /* shorthand for both axes */
-}
+- **Cascade debug:** "Why does `.btn:hover` override `@layer components { .btn { ... } }`?"
+- **Container query:** "Build a responsive card with `@container` and fallback"
+- **Modern color:** "Convert `#3B82F6` to `oklch()` + `light-dark()` tokens"
+- **Grid architecture:** "Design a 3-column dashboard with subgrid + auto-placement"
+- **Parent-state styling:** "Style `.form-group` when child `input:invalid` using `:has()`"
+- **Scroll animation:** "Implement progress indicator with `animation-timeline: scroll()`"
 
-/* Legacy fallback: absolute positioning */
-.child {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
